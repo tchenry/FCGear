@@ -216,7 +216,6 @@ class cycloide_gear(object):
         obj.Proxy = self
 
     def execute(self, fp):
-        pass
         fp.gear.m = fp.module.Value
         fp.gear.z = fp.teeth
         fp.gear.z1 = fp.inner_diameter.Value
@@ -249,7 +248,6 @@ class cycloide_gear(object):
             sh = Face(wi)
             fp.Shape = sh.extrude(App.Vector(0, 0, fp.height.Value))
         else:
-            pass
             fp.Shape = helicalextrusion(
                 wi, fp.height.Value, fp.height.Value * tan(fp.beta.Value * pi / 180) * 2 / fp.gear.d)
 
@@ -303,7 +301,6 @@ class bevel_gear(object):
         fp.gear.gamma = fp.gamma.Value * pi / 180
         fp.gear.backlash = fp.backlash
         fp.gear.update()
-        pts = fp.gear.points(num=fp.numpoints)
         tooth = self.create_tooth()
         teeth = [tooth]
         rot = App.Matrix()

@@ -53,10 +53,10 @@ class gearToolBox(object):
 
 
 
-    def add_gear_wb(self, *args):
+    def add_gear_wb(self):
         try:
             wb = Gui.activeWorkbench()
-        except Exception as e:
+        except:
             return
 
         if "PartWorkbench" in str(wb):
@@ -65,9 +65,8 @@ class gearToolBox(object):
 
             # add the module to Freecad
             try:
-                if Gui.gear.gear_toolbar:
-                    Gui.gear.gear_toolbar.show()
-            except:
+                Gui.gear.gear_toolbar.show()
+            except AttributeError:
                 pass
             Gui.gear = gear.__class__("gear")
 

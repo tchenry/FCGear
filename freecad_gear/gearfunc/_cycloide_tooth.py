@@ -24,7 +24,7 @@ from __future__ import division
 from numpy import cos, sin, arccos, pi, array, linspace, transpose, vstack
 from _functions import rotation, reflection
 
-class cycloide_tooth():
+class cycloide_tooth(object):
     def __init__(self, z1 = 5, z2 = 5, z = 14, m = 5, clearence = 0.12, backlash = 0.00):
         self.m = m
         self.z = z
@@ -114,5 +114,5 @@ if __name__ == "__main__":
         for j in i:
             x.append(j[0])
             y.append(j[1])
-    pyplot.plot(x[-60:],y[-60:])
+    pyplot.plot(x,y)
     pyplot.show()

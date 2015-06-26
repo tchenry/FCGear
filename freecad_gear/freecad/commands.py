@@ -23,28 +23,28 @@ import FreeCADGui as Gui
 from freecad_gear.freecad._Classes import involute_gear, cycloide_gear, bevel_gear, involute_gear_rack
 
 
-def createInvoluteGear(*args):
+def createInvoluteGear():
     a = App.ActiveDocument.addObject("Part::FeaturePython", "involute_gear")
     involute_gear(a)
     a.ViewObject.Proxy = 0.
     App.ActiveDocument.recompute()
     Gui.SendMsgToActiveView("ViewFit")
 
-def createInvoluteRack(*args):
+def createInvoluteRack():
     a = App.ActiveDocument.addObject("Part::FeaturePython", "involute_gear")
     involute_gear_rack(a)
     a.ViewObject.Proxy = 0.
     App.ActiveDocument.recompute()
     Gui.SendMsgToActiveView("ViewFit")
 
-def createBevelGear(*args):
+def createBevelGear():
     a = App.ActiveDocument.addObject("Part::FeaturePython", "bevel_gear")
     bevel_gear(a)
     a.ViewObject.Proxy = 0.
     App.ActiveDocument.recompute()
     Gui.SendMsgToActiveView("ViewFit")
 
-def createCycloidGear(*args):
+def createCycloidGear():
     a = App.ActiveDocument.addObject("Part::FeaturePython", "cycloide_gear")
     cycloide_gear(a)
     a.ViewObject.Proxy = 0.

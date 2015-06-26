@@ -136,7 +136,6 @@ class bevel_tooth(object):
         ref = reflection3D(pi/2)
         pts1 = ref(pts)[::-1]
         rot = rotation3D(2*pi/self.z)
-        pt3 = rot(pts[0])
         if self.add_foot:
             return(array([
                 [pts[0],pts[1]],
@@ -145,7 +144,6 @@ class bevel_tooth(object):
                 pts1[:-1],
                 [pts1[-2], pts1[-1]]
                 ]))
-            return(array([pts,[pts[-1],pts1[0]], pts1]))
         else:
             return(array([pts,[pts[-1],pts1[0]], pts1]))
 

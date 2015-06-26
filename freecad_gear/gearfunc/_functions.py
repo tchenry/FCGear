@@ -99,8 +99,8 @@ def trim(p1, p2, p3, p4):
         return(p2)
     try:
         g, h = solve(transpose([-a2 + a1, a4 - a3]), a1 - a3)
-    except:
-        print(Exception)
+    except Exception as e:
+        print(e)
         return(False)
     else:
         if 0. < g < 1. and 0. < h < 1.:

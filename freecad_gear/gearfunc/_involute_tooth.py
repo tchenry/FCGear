@@ -144,7 +144,7 @@ class involute_tooth(object):
             return(self.dg / 2 * sin(phi) - phi * self.dg / 2 * cos(phi))
         return(func)
 
-    def _update(self):
+    def update(self):
         self.__init__(m = self.m_n, z = self.z,
                 alpha = self.alpha, clearence = self.clearence, shift = self.shift,
                 beta = self.beta, undercut = self.undercut, backlash = self.backlash)
@@ -157,7 +157,7 @@ class involute_rack(object):
         self.m = m
         self.z = z
 
-    def _update(self):
+    def update(self):
         self.__init__(m = self.m, z = self.z, alpha = self.alpha, thickness = self.thickness)
 
     def points(self):

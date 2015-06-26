@@ -101,7 +101,7 @@ class cycloide_tooth(object):
         one_tooth = [pts1,array([pts1[-1],pts2[0]]), pts2]
         return(one_tooth)
 
-    def _update(self):
+    def update(self):
         self.__init__(m = self.m, z = self.z, z1 = self.z1, z2 = self.z2,
                       clearence = self.clearence, backlash = self.backlash)
 

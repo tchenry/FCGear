@@ -25,12 +25,10 @@ from freecad_gear.gearfunc._involute_tooth import involute_tooth, involute_rack
 from freecad_gear.gearfunc._cycloide_tooth import cycloide_tooth
 from freecad_gear.gearfunc._bevel_tooth import bevel_tooth
 from Part import BSplineCurve, Shape, Wire, Face, \
-    BRepOffsetAPI, Shell, makeLoft, Solid, Line, BSplineSurface, Compound,\
+    BRepOffsetAPI, Shell, Solid, Line, BSplineSurface, Compound,\
     makePolygon, makeLoft, makeHelix
 import Part
-from numpy import pi, sin, tan
-
-import numpy
+from numpy import pi, tan
 
 
 def fcvec(x):
@@ -93,7 +91,7 @@ class involute_gear(object):
         fp.gear.beta = fp.beta.Value * pi / 180
         fp.gear.clearence = fp.clearence
         fp.gear.backlash = fp.backlash.Value
-        fp.gear._update()
+        fp.gear.update()
         pts = fp.gear.points(num=fp.numpoints)
         if not fp.simple:
             wi = []
@@ -169,7 +167,7 @@ class involute_gear_rack(object):
         fp.rack.z = fp.teeth
         fp.rack.alpha = fp.alpha.Value * pi / 180.
         fp.rack.thickness = fp.thickness.Value
-        fp.rack._update()
+        fp.rack.update()
         pts = fp.rack.points()
         pol = Wire(makePolygon(map(fcvec, pts)))
         fp.Shape = Face(Wire(pol)).extrude(fcvec([0., 0., fp.height]))
@@ -225,7 +223,7 @@ class cycloide_gear(object):
         fp.gear.z2 = fp.outer_diameter.Value
         fp.gear.clearence = fp.clearence
         fp.gear.backlash = fp.backlash.Value
-        fp.gear._update()
+        fp.gear.update()
         pts = fp.gear.points(num=fp.numpoints)
         wi = []
         for i in pts:
@@ -304,7 +302,7 @@ class bevel_gear(object):
         fp.gear.alpha = fp.alpha.Value * pi / 180.
         fp.gear.gamma = fp.gamma.Value * pi / 180
         fp.gear.backlash = fp.backlash
-        fp.gear._update()
+        fp.gear.update()
         pts = fp.gear.points(num=fp.numpoints)
         tooth = self.create_tooth()
         teeth = [tooth]
@@ -343,7 +341,7 @@ class bevel_gear(object):
         fp.gear.gamma = fp.gamma.Value * pi / 180
         fp.gear.backlash = fp.backlash.Value
         fp.gear.clearence = fp.clearence
-        fp.gear._update()
+        fp.gear.update()
         pts = fp.gear.points(num=fp.numpoints)
         scal1 = fp.m.Value * fp.gear.z / 2 / tan(
             fp.gamma.Value * pi / 180) - fp.height.Value / 2

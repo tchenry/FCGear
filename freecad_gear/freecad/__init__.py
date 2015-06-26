@@ -45,8 +45,7 @@ class gearToolBox(object):
             self.involuteGearAction,
             self.involuteRackAction,
             self.bevelGearAction,
-            self.cycloidGearAction,
-            self.dropdown_action] = [None, None, None, None, None]
+            self.cycloidGearAction] = [None, None, None, None]
         self.defaultAction = createInvoluteGear
         self.add_gear_wb()
         mw.workbenchActivated.connect(self.add_gear_wb)
@@ -56,7 +55,6 @@ class gearToolBox(object):
 
 
     def add_gear_wb(self, *args):
-        print("Workbench_changed")
         try:
             wb = Gui.activeWorkbench()
         except Exception as e:
@@ -73,7 +71,6 @@ class gearToolBox(object):
             except:
                 pass
             Gui.gear = gear.__class__("gear")
-            print(type(gear))
 
             # create toolbar
             Gui.gear.gear_toolbar = mainWindow.addToolBar("Part: GearToolbar")
@@ -120,24 +117,29 @@ class gearToolBox(object):
             temp5 = Gui.gear.gear_toolbar.addAction(self.dropdown.menuAction())
             self.checkDocument()
 
-            self.defaultCommand = createInvoluteGear
+            self._defaultCommand = createInvoluteGear
             self.dropdown.menuAction().triggered.connect(self.defaultCommand)
 
     def set_default_action(self, action, command):
         def cb(*args):
             self.dropdown.setIcon(action.icon())
-            self.defaultCommand = command
+            self._defaultCommand = command
             command()
         return cb
+
+    def defaultCommand(self):
+        self._defaultCommand()
 
     def checkDocument(self, *args):
         enable = False
         if App.ActiveDocument:
             enable = True
         for action in [self.involuteGearAction, self.involuteRackAction,
-                       self.bevelGearAction, self.cycloidGearAction, self.dropdown.menuAction()]:
+                       self.bevelGearAction, self.cycloidGearAction]:
             if action:
                 action.setEnabled(enable)
+        if hasattr(self, "dropdown"):
+            self.dropdown.menuAction().setEnabled(enable)
 
 if freecad_found:
     a = gearToolBox()

@@ -35,7 +35,7 @@ class cycloide_tooth():
         self._calc_gear_factors()
 
     def _calc_gear_factors(self):
-    	self.d1 = self.z1 * self.m
+        self.d1 = self.z1 * self.m
         self.d2 = self.z2 * self.m
         self.phi = self.m * pi
         self.d = self.z * self.m
@@ -106,13 +106,13 @@ class cycloide_tooth():
                       clearence = self.clearence, backlash = self.backlash)
 
 if __name__ == "__main__":
-	from matplotlib import pyplot
-	gear = cycloide_tooth()
-	x = []
-	y = []
-	for i in gear.points(30):
-		for j in i:
-			x.append(j[0])
-			y.append(j[1])
-	pyplot.plot(x[-60:],y[-60:])
-	pyplot.show()
+    from matplotlib import pyplot
+    gear = cycloide_tooth()
+    x = []
+    y = []
+    for i in gear.points(30):
+        for j in i:
+            x.append(j[0])
+            y.append(j[1])
+    pyplot.plot(x[-60:],y[-60:])
+    pyplot.show()

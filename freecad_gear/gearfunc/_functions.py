@@ -42,7 +42,8 @@ def reflection3D(alpha):
     return(func)
 
 
-def rotation(alpha, midpoint=[0, 0]):
+def rotation(alpha, midpoint=None):
+    midpoint = midpoint or [0, 0]
     mat = array([[cos(alpha), -sin(alpha)], [sin(alpha), cos(alpha)]])
     midpoint = array(midpoint)
     vec = midpoint - dot(midpoint, mat)

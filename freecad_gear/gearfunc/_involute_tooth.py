@@ -93,7 +93,8 @@ class involute_tooth():
         s = trimfunc(l1, l2[::-1])
         if self.undercut:
             if isinstance(s, ndarray):
-                u1, e1 = s
+                u1 = s[0]
+                e1 = s[1]
             else:
                 u1, e1 = nearestpts(l2, l1)
         else:

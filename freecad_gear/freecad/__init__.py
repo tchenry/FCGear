@@ -26,7 +26,6 @@ freecad_found = True
 
 try:
     import FreeCADGui as Gui
-    import Part
     import FreeCAD as App
 except ImportError:
     freecad_found = False
@@ -107,21 +106,21 @@ class gearToolBox(object):
             self.bevelGearAction.triggered.connect(
                 self.set_default_action(self.bevelGearAction, createBevelGear))
 
-
-            temp1 = self.dropdown.addAction(self.involuteGearAction)
-            temp2 = self.dropdown.addAction(self.involuteRackAction)
-            temp3 = self.dropdown.addAction(self.cycloidGearAction)
-            temp4 = self.dropdown.addAction(self.bevelGearAction)
-
             self.dropdown.setIcon(self.involuteGearAction.icon())
-            temp5 = Gui.gear.gear_toolbar.addAction(self.dropdown.menuAction())
+
+            self.temp1 = self.dropdown.addAction(self.involuteGearAction)
+            self.temp2 = self.dropdown.addAction(self.involuteRackAction)
+            self.temp3 = self.dropdown.addAction(self.cycloidGearAction)
+            self.temp4 = self.dropdown.addAction(self.bevelGearAction)
+            self.temp5 = Gui.gear.gear_toolbar.addAction(self.dropdown.menuAction())
+
             self.checkDocument()
 
             self._defaultCommand = createInvoluteGear
             self.dropdown.menuAction().triggered.connect(self.defaultCommand)
 
     def set_default_action(self, action, command):
-        def cb(*args):
+        def cb():
             self.dropdown.setIcon(action.icon())
             self._defaultCommand = command
             command()
@@ -130,7 +129,7 @@ class gearToolBox(object):
     def defaultCommand(self):
         self._defaultCommand()
 
-    def checkDocument(self, *args):
+    def checkDocument(self):
         enable = False
         if App.ActiveDocument:
             enable = True

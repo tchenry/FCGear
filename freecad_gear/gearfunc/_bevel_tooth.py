@@ -156,13 +156,13 @@ class bevel_tooth(object):
 
 
 if __name__ == "__main__":
-	from matplotlib import pyplot
-	gear = bevel_tooth()
-	x = []
-	y = []
-	for i in gear.points(30):
-		for j in i:
-			x.append(j[0])
-			y.append(j[1])
-	pyplot.plot(x,y)
-	pyplot.show()
+    from matplotlib import pyplot
+    gear = bevel_tooth()
+    x = []
+    y = []
+    for i in gear.points(30):
+        for j in i:
+            x.append(j[0])
+            y.append(j[1])
+    pyplot.plot(x,y)
+    pyplot.show()

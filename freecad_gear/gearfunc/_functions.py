@@ -22,6 +22,7 @@
 from __future__ import division
 from numpy import sin, cos, dot, array, ndarray, vstack, transpose, sqrt
 from numpy.linalg import solve
+import numpy as np
 
 
 def reflection(alpha):
@@ -137,10 +138,7 @@ def trimfunc(l1, l2):
 
 def norm(vec1, vec2):
     vec = array(vec2) - array(vec1)
-    out = 0
-    for i in vec:
-        out += i ** 2
-    return(sqrt(out))
+    return np.linalg.norm(vec)
 
 
 def nearestpts(evolv, underc):
@@ -161,3 +159,16 @@ def nearestpts(evolv, underc):
             jk += 1
         ik += 1
     return([vstack([underc[:jout], evolv[iout]]), evolv[iout:]])
+
+
+
+def intersection_line_circle(p1, p2, r):
+    """return the intersection point of a line from p1 to p2 and a sphere of radius 1 and 
+    midpoint 0,0,0"""
+    d = p2 - p1
+    d /= np.linalg.norm(d)
+    p_half = d.dot(p1)
+    q = p1.dot(p1) - r ** 2
+    t = -p_half + sqrt(p_half ** 2 - q)
+    print(t)
+    return p1 + d * t

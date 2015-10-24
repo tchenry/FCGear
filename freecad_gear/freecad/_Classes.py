@@ -337,15 +337,15 @@ class bevel_gear(object):
         fp.gear.alpha = fp.alpha.Value * pi / 180.
         fp.gear.gamma = fp.gamma.Value * pi / 180
         fp.gear.backlash = fp.backlash.Value
-        fp.gear.clearence = fp.clearence
+        scale = fp.m.Value * fp.gear.z / 2 / tan(fp.gamma.Value * pi / 180)
+        fp.gear.clearence = fp.clearence / scale
         fp.gear.update()
         pts = fp.gear.points(num=fp.numpoints)
-        scal1 = fp.m.Value * fp.gear.z / 2 / tan(
-            fp.gamma.Value * pi / 180) - fp.height.Value / 2
-        scal2 = fp.m.Value * fp.gear.z / 2 / tan(
-            fp.gamma.Value * pi / 180) + fp.height.Value / 2
-        fp.Shape = makeLoft([self.createteeths(pts, scal1, fp.teeth), self.createteeths(pts, scal2, fp.teeth)], True)
-        # fp.Shape = self.createteeths(pts, pos1, fp.teeth)
+        scale1 = scale - fp.height.Value / 2
+        scale2 = scale + fp.height.Value / 2
+        fp.Shape = makeLoft([self.create_teeth(pts, scale1, fp.teeth),
+                             self.create_teeth(pts, scale2, fp.teeth)], True)
+        # fp.Shape = self.create_teeth(pts, pos1, fp.teeth)
 
 
     def create_tooth(self):
@@ -371,11 +371,11 @@ class bevel_gear(object):
             surfs.append(b)
         return Shape(surfs)
 
-    def createteeths(self, pts, pos, teeth):
+    def create_teeth(self, pts, pos, teeth):
         w1 = []
-        for i in pts:
+        for point in pts:
             scale = lambda x: x * pos
-            i_scale = map(scale, i)
+            i_scale = map(scale, point)
             out = BSplineCurve()
             out.interpolate(map(fcvec, i_scale))
             w1.append(out)
@@ -393,7 +393,7 @@ class bevel_gear(object):
         pt_0 = wi[-1].Edges[-1].Vertexes[0].Point
         pt_1 = wi[0].Edges[0].Vertexes[-1].Point
         wi.append(Wire([Line(pt_0, pt_1).toShape()]))
-        return(Wire(wi))
+        return Wire(wi)
 
     def __getstate__(self):
         return None

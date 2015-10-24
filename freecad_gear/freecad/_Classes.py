@@ -286,7 +286,7 @@ class bevel_gear(object):
         obj.gear = self.bevel_tooth
         obj.m = '1. mm'
         obj.teeth = 15
-        obj.alpha = '70. deg'
+        obj.alpha = '20. deg'
         obj.gamma = '45. deg'
         obj.height = '5. mm'
         obj.numpoints = 6
@@ -334,7 +334,7 @@ class bevel_gear(object):
     def execute(self, fp):
         fp.gear.z = fp.teeth
         fp.gear.module = fp.m.Value
-        fp.gear.alpha = fp.alpha.Value * pi / 180.
+        fp.gear.alpha = (90 - fp.alpha.Value) * pi / 180.
         fp.gear.gamma = fp.gamma.Value * pi / 180
         fp.gear.backlash = fp.backlash.Value
         scale = fp.m.Value * fp.gear.z / 2 / tan(fp.gamma.Value * pi / 180)

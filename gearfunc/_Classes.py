@@ -446,7 +446,7 @@ def helicalextrusion(wire, height, angle):
     pipeshell = BRepOffsetAPI.MakePipeShell(spine)
     pipeshell.setSpineSupport(spine)
     pipeshell.add(wire)
-    pipeshell.setAuxiliarySpine(auxspine, True, False)
+    pipeshell.setAuxiliarySpine(auxspine, True, 3)
     assert(pipeshell.isReady())
     pipeshell.build()
     faces.extend(pipeshell.shape().Faces)

@@ -20,8 +20,8 @@
 
 import FreeCADGui as Gui
 import FreeCAD as App
-import gear_rc
-import gearfunc
+from FCGear import gear_rc
+from FCGear import gearfunc
 
 try:
     from FreeCADGui import Workbench
@@ -40,7 +40,7 @@ class gearWorkbench(Workbench):
 
     def Initialize(self):
 
-        from gearfunc import CreateCycloideGear, CreateInvoluteGear, CreateBevelGear, CreateInvoluteRack
+        from FCGear.gearfunc import CreateCycloideGear, CreateInvoluteGear, CreateBevelGear, CreateInvoluteRack
 
         self.appendToolbar("Gear", ["CreateInvoluteGear", "CreateInvoluteRack", "CreateCycloideGear", "CreateBevelGear"])
         self.appendMenu("Gear", ["CreateInvoluteGear", "CreateInvoluteRack", "CreateCycloideGear","CreateBevelGear"])

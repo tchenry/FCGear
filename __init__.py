@@ -1,9 +1,9 @@
 #!/usr/lib/python
 
-from gearfunc._involute_tooth import involute_rack, involute_tooth
-from gearfunc._cycloide_tooth import cycloide_tooth
-from gearfunc._bevel_tooth import bevel_tooth
-from gearfunc import CreateInvoluteRack, CreateCycloideGear, CreateInvoluteGear, CreateBevelGear
+from FCGear.gearfunc._involute_tooth import involute_rack, involute_tooth
+from FCGear.gearfunc._cycloide_tooth import cycloide_tooth
+from FCGear.gearfunc._bevel_tooth import bevel_tooth
+from FCGear.gearfunc import CreateInvoluteRack, CreateCycloideGear, CreateInvoluteGear, CreateBevelGear
 
 __All__ = [
     "CreateInvoluteRack",
@@ -14,4 +14,3 @@ __All__ = [
     "involute_tooth",
     "bevel_tooth"
 ]
-

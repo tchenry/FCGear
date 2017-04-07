@@ -31,7 +31,7 @@ from Part import BSplineCurve, Shape, Wire, Face, makePolygon, \
 import Part
 from ._functions import rotation3D, rotation
 from numpy import pi, cos, sin, tan
-
+from freecad.modules.fc_gear import ICONPATH 
 import numpy
 
 
@@ -41,7 +41,6 @@ __all__=["involute_gear",
          "bevel_gear", 
          "involute_gear_rack",
          "ViewProviderGear"]
-
 
 
 def fcvec(x):
@@ -59,14 +58,14 @@ class ViewProviderGear:
         self.vobj = vobj
 
     def getIcon(self):
-        _dir = os.path.dirname(os.path.realpath(__file__))
-        return(_dir + "/../Resources/icons/involutegear.svg")
+        return os.path.join(ICONPATH, "involutegear.svg")
 
     def __getstate__(self):
         return None
 
     def __setstate__(self, state):
         return None
+
 
 class involute_gear():
 
@@ -446,7 +445,7 @@ def helicalextrusion(wire, height, angle):
     pipeshell = BRepOffsetAPI.MakePipeShell(spine)
     pipeshell.setSpineSupport(spine)
     pipeshell.add(wire)
-    pipeshell.setAuxiliarySpine(auxspine, True, 3)
+    pipeshell.setAuxiliarySpine(auxspine, True, long(3))
     assert(pipeshell.isReady())
     pipeshell.build()
     faces.extend(pipeshell.shape().Faces)

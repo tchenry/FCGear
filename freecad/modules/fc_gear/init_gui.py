@@ -18,43 +18,46 @@
 #*                                                                         *
 #***************************************************************************
 
-import FreeCADGui as Gui
-import FreeCAD as App
-from FCGear import gear_rc
-from FCGear import gearfunc
+import os
+import FreeCADGui as gui
+import FreeCAD as app
+from freecad.modules.fc_gear import ICONPATH
 
 try:
     from FreeCADGui import Workbench
 except ImportError as e:
-    App.Console.PrintWarning("you are using the GearWorkbench with an old version of FreeCAD (<0.16)")
-    App.Console.PrintWarning("the class Workbench is loaded, allthough not imported: magic")
+    app.Console.PrintWarning("you are using the GearWorkbench with an old version of FreeCAD (<0.16)")
+    app.Console.PrintWarning("the class Workbench is loaded, allthough not imported: magic")
 
 class gearWorkbench(Workbench):
     """glider workbench"""
     MenuText = "Gear"
     ToolTip = "Gear Workbench"
-    Icon = "gearworkbench.svg"
+    Icon = os.path.join(ICONPATH, "gearworkbench.svg")
 
     def GetClassName(self):
         return "Gui::PythonWorkbench"
 
     def Initialize(self):
 
-        from FCGear.gearfunc import CreateCycloideGear, CreateInvoluteGear, CreateBevelGear, CreateInvoluteRack
+        from freecad.modules.fc_gear.gearfunc import CreateCycloideGear
+        from freecad.modules.fc_gear.gearfunc import CreateInvoluteGear
+        from freecad.modules.fc_gear.gearfunc import CreateBevelGear
+        from freecad.modules.fc_gear.gearfunc import CreateInvoluteRack
 
         self.appendToolbar("Gear", ["CreateInvoluteGear", "CreateInvoluteRack", "CreateCycloideGear", "CreateBevelGear"])
         self.appendMenu("Gear", ["CreateInvoluteGear", "CreateInvoluteRack", "CreateCycloideGear","CreateBevelGear"])
-        Gui.addIconPath(App.getHomePath()+"Mod/gear/icons/")
-        Gui.addCommand('CreateInvoluteGear', CreateInvoluteGear())
-        Gui.addCommand('CreateCycloideGear', CreateCycloideGear())
-        Gui.addCommand('CreateBevelGear', CreateBevelGear())
-        Gui.addCommand('CreateInvoluteRack', CreateInvoluteRack())
+        gui.addIconPath(app.getHomePath()+"Mod/gear/icons/")
+        gui.addCommand('CreateInvoluteGear', CreateInvoluteGear())
+        gui.addCommand('CreateCycloideGear', CreateCycloideGear())
+        gui.addCommand('CreateBevelGear', CreateBevelGear())
+        gui.addCommand('CreateInvoluteRack', CreateInvoluteRack())
 
     def Activated(self):
         pass
 
-
     def Deactivated(self):
         pass
 
-Gui.addWorkbench(gearWorkbench())
+
+gui.addWorkbench(gearWorkbench())

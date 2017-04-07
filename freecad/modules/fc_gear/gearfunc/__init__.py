@@ -18,10 +18,11 @@
 #*                                                                         *
 #***************************************************************************
 
-
+import os
 import FreeCAD
 import FreeCADGui as Gui
 from ._Classes import *
+from freecad.modules.fc_gear import ICONPATH
 
 
 class CreateInvoluteGear():
@@ -30,7 +31,9 @@ class CreateInvoluteGear():
         pass
 
     def GetResources(self):
-        return {'Pixmap': 'involutegear.svg', 'MenuText': 'involute gear', 'ToolTip': 'involute gear'}
+        return {'Pixmap': os.path.join(ICONPATH, 'involutegear.svg'),
+                'MenuText': 'involute gear', 
+                'ToolTip': 'involute gear'}
 
     def IsActive(self):
         if FreeCAD.ActiveDocument is None:
@@ -51,7 +54,9 @@ class CreateInvoluteRack():
         pass
 
     def GetResources(self):
-        return {'Pixmap': 'involuterack.svg', 'MenuText': 'involute rack', 'ToolTip': 'involute rack'}
+        return {'Pixmap': os.path.join(ICONPATH, 'involuterack.svg'),
+                'MenuText': 'involute rack',
+                'ToolTip': 'involute rack'}
 
     def IsActive(self):
         if FreeCAD.ActiveDocument is None:
@@ -72,7 +77,9 @@ class CreateCycloideGear():
         pass
 
     def GetResources(self):
-        return {'Pixmap': 'cycloidegear.svg', 'MenuText': 'cycloide gear', 'ToolTip': 'cycloide gear'}
+        return {'Pixmap': os.path.join(ICONPATH, 'cycloidegear.svg'),
+                'MenuText': 'cycloide gear',
+                'ToolTip': 'cycloide gear'}
 
     def IsActive(self):
         if FreeCAD.ActiveDocument is None:
@@ -92,7 +99,9 @@ class CreateBevelGear():
         pass
 
     def GetResources(self):
-        return {'Pixmap': 'bevelgear.svg', 'MenuText': 'bevel gear', 'ToolTip': 'bevel gear'}
+        return {'Pixmap': os.path.join(ICONPATH, 'bevelgear.svg'),
+                'MenuText': 'bevel gear',
+                'ToolTip': 'bevel gear'}
 
     def IsActive(self):
         if FreeCAD.ActiveDocument is None:
